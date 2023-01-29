@@ -1,20 +1,17 @@
+import sys
 import mouse
 import keyboard
+import clipboard
 import pyautogui
+import pyperclip
 from time import sleep, time
 from rich import print
 from win10toast import ToastNotifier
 from pynput.keyboard import Key, Controller
-from pynput import keyboard as k2
-import sys
-keyboard2 = Controller()
 toaster = ToastNotifier()
 
-# left click
-# mouse.click('right')
-keyboard.add_abbreviation("ik", "ilungakadiongo@gmail.com")
 
-print(mouse.get_position())
+keyboard.add_abbreviation("ik", "ilungakadiongo@gmail.com")
 
 
 def move_to_journal() -> bool:
@@ -112,23 +109,40 @@ def main():
     start_time = time()
     done = 0
     moved = False
-    for i in range(5):
+    for i in range(5000):
+        data: str = clipboard.paste()
+        if data != "Unposted":
+            print(f"Something went wrong we quit, in in clipboard={data}")
+            break
+        keyboard.press("ctrl")
+        keyboard.send("c")
+        keyboard.release("ctrl")
+        
         if moved is not True:
             moved = move_to_delete_button()
         if moved:
             mouse.click("left")
-            sleep(0.5)
+            sleep(0.7)
             keyboard.send("tab")
             keyboard.send("enter")
         else:
             print("Mouse not moved to delete button, so can't click")
             break
-        # sleep(2)
+        
+        # sleep(1)
         keyboard.press("ctrl")
         keyboard.send("s")
         keyboard.release("ctrl")
-        sleep(0.5)
-        keyboard.send("enter")
+        sleep(1)
+
+
+        data: str = clipboard.paste()
+        if data != "Unposted":
+            print(f"Something went wrong we quit, in in clipboard={data}")
+            break
+        else:
+            keyboard.send("enter")
+
         # move_save = move_to_save()
 
         # if move_save:
@@ -144,7 +158,7 @@ def main():
         # else:
         #    print("No error dialog")
 
-        print(f"Lign {done} done successfully.")
+        print(f"Ligne {done} done successfully.")
         done += 1
         sleep(0.7)
     else:

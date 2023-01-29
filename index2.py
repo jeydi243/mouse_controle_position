@@ -97,16 +97,16 @@ def main():
     start_time = time()
     done = 0
     moved = False
-    for i in range(1000):
+    for i in range(5000):
         # go to delete button
         pyautogui.moveTo(x=355,y=91)
         mouse.click("left")
-        sleep(.5)
+        sleep(1)
         
         # go to journal
         pyautogui.moveTo(x=1036,y=588)
         mouse.click("left")
-        sleep(.5)        
+        sleep(1)        
         
         # keyboard.send("tab")
         # keyboard.send("enter")
@@ -115,8 +115,10 @@ def main():
         keyboard.press('ctrl')
         keyboard.send('s') 
         keyboard.release("ctrl")
+        
+        sleep(1)
         keyboard.send("enter")
-        sleep(.5)
+        sleep(1)
         
         #  click ok after save
         pyautogui.moveTo(x=1146,y=608)
