@@ -110,13 +110,6 @@ def main():
     done = 0
     moved = False
     for i in range(5000):
-        data: str = clipboard.paste()
-        if data != "Unposted":
-            print(f"Something went wrong we quit, in in clipboard={data}")
-            break
-        keyboard.press("ctrl")
-        keyboard.send("c")
-        keyboard.release("ctrl")
         
         if moved is not True:
             moved = move_to_delete_button()
@@ -135,13 +128,15 @@ def main():
         keyboard.release("ctrl")
         sleep(1)
 
+        keyboard.send("enter")
 
+        keyboard.press("ctrl")
+        keyboard.send("c")
+        keyboard.release("ctrl")
         data: str = clipboard.paste()
         if data != "Unposted":
             print(f"Something went wrong we quit, in in clipboard={data}")
             break
-        else:
-            keyboard.send("enter")
 
         # move_save = move_to_save()
 
