@@ -109,7 +109,7 @@ def main():
     start_time = time()
     done = 0
     moved = False
-    for i in range(5000):
+    for i in range(100):
         
         if moved is not True:
             moved = move_to_delete_button()
